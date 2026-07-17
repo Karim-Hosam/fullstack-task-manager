@@ -4,7 +4,6 @@ import { IoFolder } from "react-icons/io5";
 import { IoAddCircle } from "react-icons/io5";
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { useSelector } from 'react-redux';
 import { eventEmitter } from './eventEmitter';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';

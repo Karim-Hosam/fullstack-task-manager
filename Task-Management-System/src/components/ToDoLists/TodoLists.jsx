@@ -5,7 +5,6 @@ import TodoListMain from './TodoListMain';
 import { useDispatch, useSelector } from 'react-redux';
 import { jwtDecode } from 'jwt-decode';
 import { eventEmitter } from './eventEmitter';
-import { eventEmitter } from './eventEmitter';
 import { useParams } from 'react-router-dom';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
@@ -46,7 +45,7 @@ export default function TodoLists() {
     <div className={styles.container}>
       <div className={styles.tasksContainer}>
         {error && <p>{error}</p>}
-        <TodoListMain todoLists={todoLists} setTodoLists={setTodoLists} folderId={folderId}/>
+        <TodoListMain todoLists={todoLists} setTodoLists={setTodoLists} folderId={folderId} />
       </div>
     </div>
   );
