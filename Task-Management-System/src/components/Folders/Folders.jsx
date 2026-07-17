@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { jwtDecode } from 'jwt-decode';
 import { eventEmitter } from './eventEmitter';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 export default function Folders() {
     const [folders, setFolders] = useState([]);
     const token = useSelector((state) => state.TokenInUse);
@@ -16,7 +18,7 @@ export default function Folders() {
         userData = jwtDecode(token);
 
         const getFolderFromDB = () => {
-            axios.get(`http://localhost:3000/api/folders/${userData.uniqueId}`)
+            axios.get(`${API_URL}/api/folders/${userData.uniqueId}`)
                 .then(response => {
                     setFolders(response.data);
                 })

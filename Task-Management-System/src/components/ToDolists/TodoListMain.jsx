@@ -6,7 +6,10 @@ import axios from 'axios';
 import { eventEmitter } from './eventEmitter';
 import TodoList from './TodoList';
 import { useOutletContext } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 export default function TodoListMain({ todoLists, setTodoLists, folderId }) {
 
@@ -35,7 +38,7 @@ export default function TodoListMain({ todoLists, setTodoLists, folderId }) {
 
 
   const handleDeleteTodoList = () => {
-    axios.delete(`http://localhost:3000/api/todoLists/${TodoListToBeDeleted}`)
+    axios.delete(`${API_URL}/api/todoLists/${TodoListToBeDeleted}`)
       .then((respone) => {
         eventEmitter.emit('updateTodoList');
       })

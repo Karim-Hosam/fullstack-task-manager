@@ -55,40 +55,29 @@ The **Task Management System** is a full-stack web application designed to help 
    - Open **MySQL Workbench** or your preferred SQL client.  
    - Run the SQL script provided in `Database Creation.txt` to create the required tables and relationships:
 
-4. **Configure Database Connection**  
-   Update the MySQL credentials in `Server/config/db.js`:
-   ```javascript
-   const mysql = require('mysql');
-
-   const db = mysql.createConnection({
-     host: 'localhost',
-     user: 'root',
-     password: 'your_password',
-     database: 'mysql2'
-   });
-
-   db.connect((err) => {
-     if (err) throw err;
-     console.log('MySQL Connected...');
-   });
-
-   module.exports = db;
-   ```
-
-5. **Run the Backend Server**  
-   Start the backend server:
+4. **Start the backend server:**
+   Open a new terminal and run:
    ```bash
    cd Server
-   node index.js
+   node server.js
    ```
 
-6. **Run the Frontend Application**  
-   From the project’s root directory, start the frontend:
+5. **Database Configuration:**
+   - Update the MySQL credentials using environment variables. Create a `.env` file in the `Server` directory based on `.env.example`.
+   - By default, it uses `localhost`, `root`, and `mysql2` as the database.
+   - For Aiven or similar cloud databases, you can set `DB_SSL_CA` in the `.env` file with the path or content of your CA certificate to enable SSL.
+
+6. **Set up environment variables:**
+   - Create a `.env` file in the `Task-Management-System` directory based on the `.env.example` file.
+   - Set the `VITE_API_URL` to point to your backend server (e.g., `http://localhost:3000`).
+
+7. **Start the frontend development server:**
+   From the project's root directory, start the frontend:
    ```bash
    npm run dev
    ```
 
-7. **Open the Application**  
+8. **Open the Application**  
    Visit `http://localhost:5173` in your browser to interact with the Task Management System.
 
 ---

@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { jwtDecode } from 'jwt-decode';
 import { useParams } from 'react-router-dom';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 const Tasks = () => {
   const { tasks, updateTasks } = useOutletContext();
   const { uniqueId } = useParams();
@@ -24,7 +26,7 @@ const Tasks = () => {
     const updatedTask = { ...task, status: updatedStatus };
 
     try {
-      await axios.put(`http://localhost:3000/api/tasks/${task.uniqueId}`, {
+      await axios.put(`${API_URL}/api/tasks/${task.uniqueId}`, {
         task: updatedTask
       });
 

@@ -12,6 +12,8 @@ function choosePriorityClass(priority) {
     else return TDCSS.LowPriority;
 }
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 export default function TaskDetails() {
     const [task, setTask] = useState(null);
     const { updateTasks } = useOutletContext();
@@ -22,7 +24,7 @@ export default function TaskDetails() {
     useEffect(() => {
         const fetchTask = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/taskDetails/${uniqueId}`);
+                const response = await axios.get(`${API_URL}/api/taskDetails/${uniqueId}`);
                 console.log(response.data);
                 setTask(response.data);
             } catch (error) {
@@ -40,7 +42,7 @@ export default function TaskDetails() {
 
     const handleTaskDelete = async () => { // No need for parameter here
         try {
-            await axios.delete(`http://localhost:3000/api/tasks/${uniqueId}`);
+            await axios.delete(`${API_URL}/api/tasks/${uniqueId}`);
             updateTasks();
             navigateToTasks();
         } catch (error) {

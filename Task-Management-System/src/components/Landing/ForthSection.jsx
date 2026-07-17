@@ -21,8 +21,6 @@ export default function ForthSection(){
                     <Card Name='Omar Mohamed' Image={Omar}></Card>
                     <Card Name='Karim Hosam' Image={Karim}></Card>
                     <Card Name='Ahmed Mohamed' Image={Abdelwahab}></Card>
-                    <Card Name='Mostafa Ahmed' Image={tempProfile}></Card>
-                    <Card Name='Ziad Hassan' Image={tempProfile}></Card>
                 </div>
             </div>
         </>

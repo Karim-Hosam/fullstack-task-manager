@@ -9,6 +9,8 @@ import { eventEmitter } from './eventEmitter';
 import { useDispatch } from 'react-redux';
 import { setPath } from '../../ReduxSlices/PathSlice';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 export default function Folder({ folder, openDeleteCheck }) {
 
   let [updatingTitle, setUpdatingTitle] = useState(false);
@@ -38,7 +40,7 @@ export default function Folder({ folder, openDeleteCheck }) {
     if (e.key === 'Enter') {
       let folderID = folder.uniqueId;
       let newTitle = e.target.value;
-      axios.post(`http://localhost:3000/api/editFolder`, { folderID, newTitle })
+      axios.post(`${API_URL}/api/editFolder`, { folderID, newTitle })
         .then(response => {
           eventEmitter.emit('updateFolders');
           console.log(response.data);

@@ -4,7 +4,10 @@ import { IoFolder } from "react-icons/io5";
 import { IoAddCircle } from "react-icons/io5";
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { eventEmitter } from './eventEmitter';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 export default function CreateTodoList({ creatingTodoList, closeCreateTodoList, folderId }) {
 
@@ -29,7 +32,7 @@ export default function CreateTodoList({ creatingTodoList, closeCreateTodoList, 
       startDate: new Date().toISOString(),
       folderId: parseInt(folderId)
     };
-    axios.post('http://localhost:3000/api/todoLists', newTodoList)
+    axios.post(`${API_URL}/api/todoLists`, newTodoList)
       .then(response => {
         if (response.data.folderId) {
           eventEmitter.emit('updateTodoList');

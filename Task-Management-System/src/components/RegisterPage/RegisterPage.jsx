@@ -4,7 +4,10 @@ import RegisterContent from './RegisterContent';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkValidation } from './RegisterValidation';
 import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 export default function RegisterPage() {
 
@@ -55,7 +58,7 @@ export default function RegisterPage() {
     // Post registration data to the server; handle response and errors
     useEffect(() => {
         if (RegisterData.email || RegisterData.userName || RegisterData.password || RegisterData.confirmPass) {
-            axios.post('http://localhost:3000/api/register', RegisterData)
+            axios.post(`${API_URL}/api/register`, RegisterData)
                 .then(response => {
                     if (response.data.error) {
                         setEmailNotUsedBefore(false);

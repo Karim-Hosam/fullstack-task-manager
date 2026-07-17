@@ -5,6 +5,8 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import {jwtDecode} from 'jwt-decode';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 export default function Home() {
     const [tasks, setTasks] = useState([]);
     const [filteredTasks, setFilteredTasks] = useState([]);
@@ -18,7 +20,7 @@ export default function Home() {
 
     const fetchTasks = async () => {
         try {
-            const response = await axios.get(`http://localhost:3000/api/allTasks/${userId}`);
+            const response = await axios.get(`${API_URL}/api/allTasks/${userId}`);
             const allTasks = response.data;
 
             console.log('Fetched tasks:', allTasks); 

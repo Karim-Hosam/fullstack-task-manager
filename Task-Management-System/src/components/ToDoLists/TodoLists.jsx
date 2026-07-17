@@ -5,7 +5,10 @@ import TodoListMain from './TodoListMain';
 import { useDispatch, useSelector } from 'react-redux';
 import { jwtDecode } from 'jwt-decode';
 import { eventEmitter } from './eventEmitter';
+import { eventEmitter } from './eventEmitter';
 import { useParams } from 'react-router-dom';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 export default function TodoLists() {
   const { folderId } = useParams();
@@ -20,7 +23,7 @@ export default function TodoLists() {
   }
 
   const getTodoListFromDB = () => {
-    axios.get(`http://localhost:3000/api/todoLists/${folderId}`)
+    axios.get(`${API_URL}/api/todoLists/${folderId}`)
       .then(response => {
         setTodoLists(response.data);
       })

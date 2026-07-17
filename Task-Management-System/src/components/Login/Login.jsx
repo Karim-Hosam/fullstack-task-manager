@@ -5,6 +5,8 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setToken } from '../../ReduxSlices/TokenSlice';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 export default function Login() {
 
     let [emailExist, setEmailExist] = useState(true);
@@ -16,7 +18,7 @@ export default function Login() {
     const submit = function (e) {
         e.preventDefault();
         e.target.LoginButton.blur();
-        axios.post("http://localhost:3000/api/login", user.current)
+        axios.post(`${API_URL}/api/login`, user.current)
             .then(response => {
                 if (response.data.emailNotExist) {
                     setCorrectPassword(true);

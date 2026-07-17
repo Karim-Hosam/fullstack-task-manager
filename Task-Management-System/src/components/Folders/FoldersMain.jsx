@@ -7,6 +7,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import { eventEmitter } from './eventEmitter';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 export default function FolderMain({ folders }) {
   let [creatingFolder, setCreatingFolder] = useState(false);
   let [deleteCheck, setDeleteCheck] = useState(false);
@@ -30,7 +32,7 @@ export default function FolderMain({ folders }) {
   };
 
   const handleDeleteFolder = () => {
-    axios.delete(`http://localhost:3000/api/deleteFolder/${FolderToBeDeleted}`)
+    axios.delete(`${API_URL}/api/deleteFolder/${FolderToBeDeleted}`)
       .then(respone => {
         eventEmitter.emit('updateFolders');
         console.log(respone.data);

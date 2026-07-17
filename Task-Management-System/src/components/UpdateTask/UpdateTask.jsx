@@ -4,6 +4,8 @@ import { useParams,useNavigate } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 export default function UpdateTask(){
     const [task, setTask] = useState({});
     const [loading, setLoading] = useState(true);
@@ -14,7 +16,7 @@ export default function UpdateTask(){
     useEffect(() => {
         const fetchTask = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/taskDetails/${uniqueId}`);
+                const response = await axios.get(`${API_URL}/api/taskDetails/${uniqueId}`);
                 setTask(response.data);
                 console.log(task);
             } catch (error) {
@@ -28,10 +30,10 @@ export default function UpdateTask(){
 
     const handleSubmit = async (task) => {
         try {
-            await axios.put(`http://localhost:3000/api/tasks/${uniqueId}`, {task:task});
+            await axios.put(`${API_URL}/api/tasks/${uniqueId}`, {task:task});
             alert('Task updated successfully');
 
-            const res = await axios.get(`http://localhost:3000/api/allTasks/${task.userId}`);
+            const res = await axios.get(`${API_URL}/api/allTasks/${task.userId}`);
             updateTasks(res.data);
 
             navigate(`/home/tasks/${task.toDoListId}`);

@@ -6,6 +6,8 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { eventEmitter } from './eventEmitter';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 export default function CreateFolder({ creatingFolder, closeCreateFolder }) {
 
   const InputElem = useRef("");
@@ -24,7 +26,7 @@ export default function CreateFolder({ creatingFolder, closeCreateFolder }) {
   let chosenColor = getRandomColor();
 
   const handleCreateFolder = function () {
-    axios.post('http://localhost:3000/api/addFolder', { folderName: InputElem.current.value, token })
+    axios.post(`${API_URL}/api/addFolder`, { folderName: InputElem.current.value, token })
       .then(res => {
         if (res.data.folderId) {
           eventEmitter.emit('updateFolders');
