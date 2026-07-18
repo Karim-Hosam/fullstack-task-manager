@@ -12,13 +12,31 @@ if (process.env.DB_SSL_CA) {
     sslConfig = undefined;
 }
 
-const Connection = mysql.createConnection({
+// Use a connection pool instead of a single connection.
+// A pool handles disconnects, DNS failures, and reconnection automatically
+// without emitting unhandled 'error' events that crash the process.
+const pool = mysql.createPool({
     host: process.env.DB_HOST || 'localhost',
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || '',
     database: process.env.DB_NAME || 'mysql2',
     port: process.env.DB_PORT || 3306,
-    ssl: sslConfig
+    ssl: sslConfig,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0,
+    connectTimeout: 10000
 });
 
-module.exports = Connection;
+// Verify connectivity at startup (non-fatal — the server keeps running either way)
+pool.getConnection((err, connection) => {
+    if (err) {
+        console.error('⚠️  Database connection failed at startup:', err.message);
+        console.error('   The server will keep running and retry on each request.');
+    } else {
+        console.log('✅ Database connected successfully.');
+        connection.release();
+    }
+});
+
+module.exports = pool;
