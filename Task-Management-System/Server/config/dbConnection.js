@@ -1,9 +1,16 @@
 const mysql = require("mysql2");
 
-// Configure SSL if a CA certificate is provided
-const sslConfig = process.env.DB_SSL_CA ? {
-    ca: process.env.DB_SSL_CA
-} : undefined;
+// Configure SSL: full CA verification if DB_SSL_CA is set (e.g. Render),
+// or basic encrypted connection without CA pinning if DB_SSL=true (e.g. Back4app,
+// where the CA text is too long for their environment variable limit)
+let sslConfig;
+if (process.env.DB_SSL_CA) {
+    sslConfig = { ca: process.env.DB_SSL_CA };
+} else if (process.env.DB_SSL === 'true') {
+    sslConfig = { rejectUnauthorized: false };
+} else {
+    sslConfig = undefined;
+}
 
 const Connection = mysql.createConnection({
     host: process.env.DB_HOST || 'localhost',
