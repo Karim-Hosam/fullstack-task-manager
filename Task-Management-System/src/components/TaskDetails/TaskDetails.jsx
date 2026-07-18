@@ -1,4 +1,4 @@
-import TDCSS from './taskDetailsCSS.module.css';
+import TDCSS from './TaskDetailsCSS.module.css';
 import binIcon from '../../Images/Icons/bin.svg';
 import editIcon from '../../Images/Icons/Edit.svg';
 import { useNavigate, useParams } from 'react-router-dom';
