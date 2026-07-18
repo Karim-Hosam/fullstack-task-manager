@@ -16,25 +16,29 @@ import Tasks from './components/Tasks/Tasks.jsx'
 import TaskDetails from './components/TaskDetails/TaskDetails.jsx'
 import Folders from './components/Folders/Folders.jsx'
 import UpdateTask from './components/UpdateTask/UpdateTask.jsx'
-import Profile from './components/profile/Profile.jsx'
+import Profile from './components/Profile/Profile.jsx'
 import TodoLists from './components/ToDoLists/TodoLists.jsx'
 
 const router = createBrowserRouter([
-  { path: '/', element: <App />, children: [
-    {index: true, element: <Landing />},
-    {path: 'about', element: <AboutUs />},
-    {path: 'home', element: <Home />, children:[
-      { index: true, element: <Folders /> },
-      { path: 'addTask/:uniqueId', element: <CreateTask /> },
-      { path: 'updateTask/:uniqueId', element: <UpdateTask/> },
-      { path: 'tasks/:uniqueId', element: <Tasks /> },
-      { path: 'taskDetails/:uniqueId', element:<TaskDetails/> },
-      { path: 'todolists/:folderId', element:<TodoLists /> },
-      { path: 'profile', element: <Profile /> },
-    ]},
-  ]},
-  {path:'register', element: <RegisterPage />},
-  {path:'login', element: <Login />},
+  {
+    path: '/', element: <App />, children: [
+      { index: true, element: <Landing /> },
+      { path: 'about', element: <AboutUs /> },
+      {
+        path: 'home', element: <Home />, children: [
+          { index: true, element: <Folders /> },
+          { path: 'addTask/:uniqueId', element: <CreateTask /> },
+          { path: 'updateTask/:uniqueId', element: <UpdateTask /> },
+          { path: 'tasks/:uniqueId', element: <Tasks /> },
+          { path: 'taskDetails/:uniqueId', element: <TaskDetails /> },
+          { path: 'todolists/:folderId', element: <TodoLists /> },
+          { path: 'profile', element: <Profile /> },
+        ]
+      },
+    ]
+  },
+  { path: 'register', element: <RegisterPage /> },
+  { path: 'login', element: <Login /> },
   { path: '*', element: <Error /> }
 ]);
 
