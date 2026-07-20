@@ -5,7 +5,10 @@ const bcrypt = require("bcryptjs");
 const loginController = (req, res) => {
     const { email, password } = req.body;
     db.query(`select * from users where email = '${email}'`, (err, data) => {
-        if (err) return res.json({ message: "Error!" })
+        if (err) {
+            console.error("Login SQL Error:", err);
+            return res.json({ message: "Error: " + err.message });
+        }
         else if (!data.length) {
             return res.json({ message: "The email you entered does not exist. Please check and try again.", emailNotExist: true })
         }

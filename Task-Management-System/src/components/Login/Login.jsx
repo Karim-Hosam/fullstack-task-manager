@@ -28,13 +28,15 @@ export default function Login() {
                     setEmailExist(true);
                     setCorrectPassword(false);
                 }
-                else {
+                else if (response.data.token) {
                     setEmailExist(true);
                     setCorrectPassword(true);
                     let token = response.data.token;
                     dispatch(setToken(token));
                     localStorage.setItem('token', token);
                     navigate('/home');
+                } else {
+                    alert(response.data.message || "An error occurred during login.");
                 }
             })
             .catch(error => {

@@ -1,13 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = localStorage.getItem('token') || '';
-
+let savedToken = localStorage.getItem('token');
+if (savedToken === 'undefined') {
+    localStorage.removeItem('token');
+    savedToken = '';
+}
+const initialState = savedToken || '';
 const TokenSlice = createSlice({
     name: "TokenSlice",
     initialState,
     reducers: {
         setToken: (state, { payload }) => {
-            return payload;
+            return payload ?? '';
         },
         clearToken: (state) => {
             localStorage.removeItem('token');  // Remove token from localStorage

@@ -6,7 +6,10 @@ const registerController = (req, res) => {
     if (username.length && email.length && password.length) {
         const hashedPassword = bcrypt.hashSync(password, 7);
         db.query(`select * from users where email = '${email}'`, (err, data) => {
-            if (err) return res.json({ message: 'Error occurs searching for used Email!' });
+        if (err) {
+            console.error("Register SQL Error:", err);
+            return res.json({ message: "Error occurs searching for used Email! Details: " + err.message });
+        }
             if (data.length) {
                 return res.json({ error: "The Email is Already Used" });
             }

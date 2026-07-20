@@ -18,7 +18,7 @@ const PathSlice = createSlice({
             localStorage.removeItem('FolderName');
             localStorage.removeItem('TodoListName');
             localStorage.removeItem('TaskName');
-            return '';
+            return { FolderName: '', TodoListName: '', TaskName: '' };
         }
     }
 })
